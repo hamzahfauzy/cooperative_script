@@ -9,14 +9,21 @@
 			<br>
 			<h2 align="center">Login</h2>
 			<div class="form-container">
+				<?php if ($error) { ?>
+				<div class="alert alert-danger" role="alert">
+					Username or Password is invalid.
+				</div>						
+				<?php } ?>
 				<form method="post" action="/login">
 					<div class="form-group">
 						<label for="username"><i class="fa fa-user"></i> Username</label>
-						<input type="text" name="username" id="username" class="form-control" placeholder="Username">
+						<input type="text" name="username" id="username" class="form-control" placeholder="Username" required="">
+						<span class="form-error username">username cannot be empty</span>
 					</div>
 					<div class="form-group">
 						<label for="password"><i class="fa fa-lock"></i> Password</label>
-						<input type="password" name="password" id="password" class="form-control" placeholder="Password">
+						<input type="password" name="password" id="password" class="form-control" placeholder="Password" required="">
+						<span class="form-error password">password cannot be empty</span>
 					</div>
 					<div class="form-group">
 						<button class="btn btn-primary btn-block"><i class="fa fa-sign-in-alt"></i> Login</button>

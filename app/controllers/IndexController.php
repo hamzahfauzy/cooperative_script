@@ -19,7 +19,9 @@ class IndexController extends Controller
 
 	function login()
 	{
-		return $this->view->render("login");
+		$error = isset($_GET['error']) ? $_GET['error'] : '';
+		$data["error"] = $error;
+		return $this->view->render("login")->with($data);
 	}
 
 	function doLogin(Request $request)
@@ -29,6 +31,11 @@ class IndexController extends Controller
 		{
 			Session::set("id",$user->id);
 			$this->redirect()->url($user->level == 1 ? "/admin" : "/student");
+			return;
+		}
+		else
+		{
+			$this->redirect()->url("/?error=invalid");
 		}
 	}
 
