@@ -22,20 +22,27 @@ class ExamController extends Controller
 
 	function index()
 	{
-		if($this->examsession->status == 1){
-			$view = "student.pretest";
-			$question = Question::find($this->examsession->pretest_question_id);
-		}else{
-			$view = "student.exam";
-			$question = Question::find($this->examsession->exam_question_id);
+		if(!empty($this->examsession))
+		{
+			if($this->examsession->status == 1){
+				$view = "student.pretest";
+				$question = Question::find($this->examsession->pretest_question_id);
+			}else{
+				$view = "student.exam";
+				$question = Question::find($this->examsession->exam_question_id);
+			}
+
+			$group = Session::user()->student()->groupMember()->group();
+			$data['examsession'] = $this->examsession;
+			$data['question'] = $question;
+			$data['group'] = $group;
+
+			return $this->view->render("student.exam")->with($data);
 		}
-
-		$group = Session::user()->student()->groupMember()->group();
-		$data['examsession'] = $this->examsession;
-		$data['question'] = $question;
-		$data['group'] = $group;
-
-		return $this->view->render("student.exam")->with($data);
+		else
+		{
+			return $this->view->render("student.no-exam")->with($data);
+		}
 	}
 
 	function answer(Request $request)
