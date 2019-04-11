@@ -34,12 +34,12 @@ class ExamSession extends Model
 
 	function exam_answers()
 	{
-		return $this->hasMany(ExamAnswer::class,["exam_session_id"=>"id"]);
+		return $this->hasMany(ExamAnswer::class,["exam_session_id"=>"id","exam_type"=>"status"]);
 	}
 
 	function exam_answer_by($NIS)
 	{
-		$model = ExamAnswer::where("exam_session_id",$this->id)->where("NIS",$NIS)->first();
+		$model = ExamAnswer::where("exam_session_id",$this->id)->where("exam_type",$this->status)->where("NIS",$NIS)->first();
 		return $model;
 	}
 

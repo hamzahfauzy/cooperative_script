@@ -14,11 +14,7 @@ use vendor\zframework\Session;
 			<center>
 			<div class="card">
 				<div class="card-header">
-					<?php if($examsession->status == 1): ?>
-						Pretest
-					<?php else: ?>
-						Exam
-					<?php endif ?>
+					Pretest
 				</div>		
 				<div class="card-body">
 					<?php if($examsession->group_1_id ==  $group->id) { ?>

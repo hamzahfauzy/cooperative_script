@@ -23,8 +23,10 @@ class ExamController extends Controller
 	function index()
 	{
 		if($this->examsession->status == 1){
+			$view = "student.pretest";
 			$question = Question::find($this->examsession->pretest_question_id);
 		}else{
+			$view = "student.exam";
 			$question = Question::find($this->examsession->exam_question_id);
 		}
 
@@ -32,6 +34,7 @@ class ExamController extends Controller
 		$data['examsession'] = $this->examsession;
 		$data['question'] = $question;
 		$data['group'] = $group;
+
 		return $this->view->render("student.exam")->with($data);
 	}
 
@@ -42,8 +45,12 @@ class ExamController extends Controller
 			'exam_session_id'		=> $this->examsession->id,
 			'NIS'					=> $this->student->NIS,
 			'answer'				=> $request->answer,
+			'answer_parent_id'		=> $request->student_as == 1 ? 0 : $request->answer_parent_id,
+			'exam_type'				=> $request->exam_type,
+			'student_as'			=> $request->student_as,
+			'answer_grade'			=> 0,
 		]);
-		$this->redirect()->url("/student");
+		$this->redirect()->url("/student/exam");
 	}
 
 	function logout()

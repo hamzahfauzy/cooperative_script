@@ -24,6 +24,13 @@ class ExamSessionController extends Controller
 		return $this->view->render("admin.examsession.index")->with($data);
 	}
 
+	function show($id)
+	{
+		$examsession = $this->examsession->find($id);
+		$data["examsession"] = $examsession;
+		return $this->view->render("admin.examsession.show")->with($data);
+	}
+
 	function create()
 	{
 		$error = isset($_GET['error']) ? $_GET['error'] : false;
@@ -33,10 +40,10 @@ class ExamSessionController extends Controller
 		$examsessions = ExamSession::get();
 		$group_1 = [];
 		$group_2 = [];
-		foreach( $examsessions as $examsession ){
-			$group_1[] = $examsession->group_1_id;
-			$group_2[] = $examsession->group_2_id;
-		};
+		// foreach( $examsessions as $examsession ){
+		// 	$group_1[] = $examsession->group_1_id;
+		// 	$group_2[] = $examsession->group_2_id;
+		// };
 		$data["error"] = $error;
 		$data["questions"] = $questions;
 		$data["group_1"] = $group_1;
@@ -63,6 +70,12 @@ class ExamSessionController extends Controller
 
 	function insert(Request $request)
 	{
+
+		if($request->group_1_id == $request->group_2_id)
+		{
+			$this->redirect()->url("/admin/examsession/create");
+			return;
+		}
 		$examsession = new ExamSession;
 		$examsession->save([
 			'name'					=>	$request->name,
@@ -70,6 +83,7 @@ class ExamSessionController extends Controller
 			'exam_question_id'		=>	$request->exam_question_id,
 			'group_1_id'			=>	$request->group_1_id,
 			'group_2_id'			=>	$request->group_2_id,
+			'status'				=>	1
 		]);
 		$this->redirect()->url("/admin/examsession");
 		return;
@@ -77,6 +91,11 @@ class ExamSessionController extends Controller
 
 	function update(Request $request)
 	{
+		if($request->group_1_id == $request->group_2_id)
+		{
+			$this->redirect()->url("/admin/examsession/update");
+			return;
+		}
 		$examsession = ExamSession::find($request->id);
 		$examsession->save([
 			'name'					=>	$request->name,
@@ -94,6 +113,16 @@ class ExamSessionController extends Controller
 		ExamSession::delete($id);
 		$this->redirect()->url("/admin/examsession");
 		return;	
+	}
+
+	function finish($id)
+	{
+		$examsession = ExamSession::find($id);
+		$examsession->save([
+			'status' =>	$examsession->status+1
+		]);
+		$this->redirect()->url("/admin/examsession/show/".$id);
+		return;
 	}
 
 	function logout()

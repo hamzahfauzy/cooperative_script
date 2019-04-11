@@ -13,6 +13,7 @@
 			  	<li class="list-group-item d-flex justify-content-between align-items-center">
 				    <?= $examsession->name ?>
 				    <div>
+				    	<a href="<?= base_url() ?>/admin/examsession/show/<?=$examsession->id?>"><i class="fas fa-eye"></i></a>
 				    	<a href="<?= base_url() ?>/admin/examsession/edit/<?=$examsession->id?>"><i class="fas fa-pencil-alt"></i></a>
 				    	<a href="<?= base_url() ?>/admin/examsession/delete/<?=$examsession->id?>"><i class="fas fa-trash-alt"></i></a>
 				    </div>

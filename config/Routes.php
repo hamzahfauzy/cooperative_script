@@ -43,6 +43,8 @@ Route::middleware("Admin")->prefix("/admin")->namespaces("Admin")->group(functio
 	Route::get("/examsession/create","ExamSessionController@create");
 	Route::post("/examsession/insert","ExamSessionController@insert");
 	Route::post("/examsession/update","ExamSessionController@update");
+	Route::get("/examsession/show/{id}","ExamSessionController@show");
+	Route::get("/examsession/{id}/finish","ExamSessionController@finish");
 	Route::get("/examsession/edit/{id}","ExamSessionController@edit");
 	Route::get("/examsession/delete/{id}","ExamSessionController@delete");
 
