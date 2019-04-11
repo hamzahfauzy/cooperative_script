@@ -18,7 +18,7 @@
 				<h5>Pretest Answer</h5>
 				<ul class="list-group">
 				<?php 
-				$answers = $examsession->exam_answers();
+				$answers = $examsession->answers();
 				foreach($answers as $answer){ 
 					if($answer->exam_type == 2)
 						continue;
@@ -57,9 +57,9 @@
 			  	<?php } ?>
 
 			  	</ul>
-			  	<?php if($no == 0){ echo "<p>No Answer</p>"; }else{ ?>
+			  	<?php if($no == 0){ echo "<p>No Answer</p>"; }else{ if($examsession->status == 2){ ?>
 					<a href="<?= base_url() ?>/admin/examsession/<?= $examsession->id ?>/finish" class="btn btn-primary btn-block">Exam Finish</a>
-				<?php } ?>
+				<?php } } ?>
 			</div>
 			
 			<p></p>

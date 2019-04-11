@@ -16,7 +16,7 @@
 			<br>
 			<center>
 				<a href="/student/exam" class="btn btn-primary btn-block"><i class="fa fa-envelope"></i> Exam</a>
-				<a href="#" class="btn btn-primary btn-block"><i class="fa fa-envelope"></i> Exam Result</a>
+				<a href="/student/exam/lists" class="btn btn-primary btn-block"><i class="fa fa-envelope"></i> Exam Result</a>
 				<a href="<?= base_url() ?>/logout" class="btn btn-danger btn-block"><i class="fa fa-sign-out-alt"></i> Log Out</a>
 			</center>
 		</div>

@@ -55,5 +55,7 @@ Route::middleware("Admin")->prefix("/admin")->namespaces("Admin")->group(functio
 Route::prefix("/student")->namespaces("Student")->group(function(){
 	Route::get("/","IndexController@index");
 	Route::get("/exam","ExamController@index");
+	Route::get("/exam/lists","ExamController@lists");
+	Route::get("/exam/show/{id}","ExamController@show");
 	Route::post("/answer","ExamController@answer");
 });

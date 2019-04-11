@@ -17,7 +17,17 @@ class ExamController extends Controller
 		parent::__construct();
 		$this->student = Student::find(Session::user()->username);
 		$this->groupMember = GroupMember::where('NIS',$this->student->NIS)->first();
-		$this->examsession = ExamSession::where('group_1_id',$this->groupMember->group_id)->orwhere('group_2_id',$this->groupMember->group_id)->first();
+		$examsession = ExamSession::where('group_1_id',$this->groupMember->group_id)->orwhere('group_2_id',$this->groupMember->group_id)->get();
+
+		$this->examsession = [];
+		foreach($examsession as $session)
+		{
+			if($session->status == 3)
+				continue;
+
+			$this->examsession = $session;
+			break;
+		}
 	}
 
 	function index()
@@ -41,8 +51,30 @@ class ExamController extends Controller
 		}
 		else
 		{
-			return $this->view->render("student.no-exam")->with($data);
+			return $this->view->render("student.no-exam");
 		}
+	}
+
+	function lists()
+	{
+		$examsessions = ExamSession::where('group_1_id',$this->groupMember->group_id)->orwhere('group_2_id',$this->groupMember->group_id)->get();
+		$exam_sessions = [];
+		foreach($examsessions as $session)
+		{
+			if($session->status == 3)
+				$exam_sessions[] = $session;
+		}
+		$data["examsessions"] = $exam_sessions;
+		return $this->view->render("student.exam-lists")->with($data);
+	}
+
+	function show($id)
+	{
+			$group = Session::user()->student()->groupMember()->group();
+			$data['examsession'] = ExamSession::find($id);
+			$data['group'] = $group;
+
+			return $this->view->render("student.exam-show")->with($data);
 	}
 
 	function answer(Request $request)
