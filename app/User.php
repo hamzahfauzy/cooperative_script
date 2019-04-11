@@ -6,4 +6,9 @@ class User extends Model
 {
 	static $table = "users";
 	static $fields = ["id","username","password","level"];
+
+	function student()
+	{
+		return $this->hasOne(Student::class,["NIS"=>"username"]);
+	}
 }

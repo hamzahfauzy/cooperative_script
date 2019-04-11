@@ -11,4 +11,9 @@ class Student extends Model
 	{
 		return $this->hasOne(User::class,["NIS"=>"username"]);
 	}
+
+	function groupMember()
+	{
+		return $this->hasOne(GroupMember::class,["NIS"=>"NIS"]);
+	}
 }

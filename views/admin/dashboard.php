@@ -16,9 +16,9 @@
 			<br>
 			<center>
 				<a href="<?= base_url() ?>/admin/student" class="btn btn-primary btn-block"><i class="fa fa-users"></i> Students</a>
-				<a href="#" class="btn btn-primary btn-block"><i class="fa fa-users-cog"></i> Groups</a>
-				<a href="#" class="btn btn-primary btn-block"><i class="fa fa-comments"></i> Questions</a>
-				<a href="#" class="btn btn-primary btn-block"><i class="fa fa-envelope"></i> Exam Sessions</a>
+				<a href="<?= base_url() ?>/admin/group" class="btn btn-primary btn-block"><i class="fa fa-users-cog"></i> Groups</a>
+				<a href="<?= base_url() ?>/admin/question" class="btn btn-primary btn-block"><i class="fa fa-comments"></i> Questions</a>
+				<a href="<?= base_url() ?>/admin/examsession" class="btn btn-primary btn-block"><i class="fa fa-envelope"></i> Exam Sessions</a>
 				<a href="<?= base_url() ?>/logout" class="btn btn-danger btn-block"><i class="fa fa-sign-out-alt"></i> Log Out</a>
 
 				<br>

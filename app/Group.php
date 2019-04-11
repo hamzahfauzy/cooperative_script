@@ -9,6 +9,6 @@ class Group extends Model
 
 	function group_member()
 	{
-		return $this->hasMany(GroupMember::class, ["id"=>"group_id"]);
+		return $this->hasMany(GroupMember::class, ["group_id"=>"id"]);
 	}
 }

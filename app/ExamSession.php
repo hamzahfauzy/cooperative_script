@@ -37,4 +37,10 @@ class ExamSession extends Model
 		return $this->hasMany(ExamAnswer::class,["exam_session_id"=>"id"]);
 	}
 
+	function exam_answer_by($NIS)
+	{
+		$model = ExamAnswer::where("exam_session_id",$this->id)->where("NIS",$NIS)->first();
+		return $model;
+	}
+
 }

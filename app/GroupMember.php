@@ -11,4 +11,9 @@ class GroupMember extends Model
 	{
 		return $this->hasOne(Student::class, ["NIS"=>"NIS"]);
 	}
+
+	function group()
+	{
+		return $this->hasOne(Group::class,["id"=>"group_id"]);
+	}
 }

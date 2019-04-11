@@ -19,9 +19,39 @@ Route::middleware("Admin")->prefix("/admin")->namespaces("Admin")->group(functio
 	Route::post("/student/update","StudentController@update");
 	Route::get("/student/edit/{NIS}","StudentController@edit");
 	Route::get("/student/delete/{NIS}","StudentController@delete");
+
+	Route::get("/group","GroupController@index");
+	Route::get("/group/create","GroupController@create");
+	Route::post("/group/insert","GroupController@insert");
+	Route::post("/group/update","GroupController@update");
+	Route::get("/group/edit/{id}","GroupController@edit");
+	Route::get("/group/show/{id}","GroupController@show");
+	Route::get("/group/delete/{id}","GroupController@delete");
+
+	Route::get("/group/{id}/create","GroupController@createMember");
+	Route::post("/group/member/insert","GroupController@insertMember");
+	Route::get("/group/{id}/delete/{NIS}","GroupController@deleteMember");
+
+	Route::get("/question","QuestionController@index");
+	Route::get("/question/create","QuestionController@create");
+	Route::post("/question/insert","QuestionController@insert");
+	Route::post("/question/update","QuestionController@update");
+	Route::get("/question/edit/{id}","QuestionController@edit");
+	Route::get("/question/delete/{id}","QuestionController@delete");
+
+	Route::get("/examsession","ExamSessionController@index");
+	Route::get("/examsession/create","ExamSessionController@create");
+	Route::post("/examsession/insert","ExamSessionController@insert");
+	Route::post("/examsession/update","ExamSessionController@update");
+	Route::get("/examsession/edit/{id}","ExamSessionController@edit");
+	Route::get("/examsession/delete/{id}","ExamSessionController@delete");
+
+
 });
 
-// for admin
+// for student
 Route::prefix("/student")->namespaces("Student")->group(function(){
 	Route::get("/","IndexController@index");
+	Route::get("/exam","ExamController@index");
+	Route::post("/answer","ExamController@answer");
 });
